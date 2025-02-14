@@ -81,13 +81,15 @@ export default function DropDownMenu() {
           <Typography component="span">Quotes List</Typography>
         </AccordionSummary>
         <AccordionDetails className="max-h-60 overflow-y-auto">
-          {quotes.map((quote) => (
-            <ul key={quote.quoteId} className="border-b pb-2">
-              <span>
-                "{quote.quote}" - <strong>{quote.name}</strong>
-              </span>
-            </ul>
-          ))}
+          <ul className="space-y-2">
+            {quotes.map((quote) => (
+              <li key={quote.quoteId} className="border-b pb-2">
+                <span>
+                  "{quote.quote}" - <strong>{quote.name}</strong>
+                </span>
+              </li>
+            ))}
+          </ul>
         </AccordionDetails>
       </Accordion>
     </div>
