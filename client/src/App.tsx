@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import DropDownMenu from "./components/DropdownMenu";
+import GitHubButton from "react-github-btn";
 
 type Quote = {
   name: string;
@@ -59,6 +60,11 @@ function App() {
           </blockquote>
         </div>
         <DropDownMenu />
+        <div className="mt-8 mx-auto">
+          <GitHubButton href="https://github.com/techmatlock/severance.rest" data-color-scheme="light" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star techmatlock/severance.rest on GitHub">
+            Star
+          </GitHubButton>
+        </div>
       </div>
     </main>
   );
