@@ -2,33 +2,11 @@ import { useState } from "react";
 import "./App.css";
 import DropDownMenu from "./components/DropdownMenu";
 import GitHubButton from "react-github-btn";
-
-type Quote = {
-  name: string;
-  quote: string;
-  quoteId: number;
-};
-
-const quotes: Quote[] = [
-  {
-    name: "Mr. Milchick",
-    quote: "Okay, refiners! Let's get this new group photo before the melon bloat sets in.",
-    quoteId: 2,
-  },
-  {
-    name: "Mr. Milchick",
-    quote: "Okay, refiners! Let's get this new group photo before the melon bloat sets in.",
-    quoteId: 3,
-  },
-  {
-    name: "Mr. Milchick",
-    quote: "Do you know how to make your eyes kind?",
-    quoteId: 4,
-  },
-];
+import { useQuotes } from "./context/useQuotes";
 
 function App() {
   const [index, setIndex] = useState(0);
+  const { quotes = [] } = useQuotes();
 
   const showNextQuote = () => {
     setIndex((prevIndex) => (prevIndex + 1) % quotes.length);
@@ -54,10 +32,14 @@ function App() {
         </div>
 
         <div>
-          <blockquote className="py-8 px-8 bg-slate-100 rounded mx-auto mt-8">
-            <p>"{quotes[index].quote}"</p>
-            <footer className="flex justify-end">- {quotes[index].name}</footer>
-          </blockquote>
+          {quotes.length > 0 ? (
+            <blockquote className="py-8 px-8 bg-slate-100 rounded mx-auto mt-8">
+              <p>"{quotes[index].quote}"</p>
+              <footer className="flex justify-end">- {quotes[index].name}</footer>
+            </blockquote>
+          ) : (
+            <p className="text-center mt-8">Loading quote...</p>
+          )}
         </div>
         <DropDownMenu />
         <div className="mt-8 mx-auto">
