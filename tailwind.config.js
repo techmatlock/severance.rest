@@ -3,10 +3,6 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors: {
-        "accent-gray": "#F8F9FA",
-        "lime-green": "#32CD32",
-      },
       screens: {
         sm: "640px",
         // => @media (min-width: 640px) { ... }
