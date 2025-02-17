@@ -7,12 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-.vite
-package-lock.json
+client/node_modules
+client/dist
+client/dist-ssr
+client/*.local
+client/.vite
+lambdas/package
+lambdas/my_deployment_package.zip
 
 # Editor directories and files
 .vscode/*
