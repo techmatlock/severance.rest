@@ -33,6 +33,36 @@ A free REST API for random Severance quotes.
    pip install -r requirements.txt
    ```
 
+### Lambda
+
+Creating a .zip deployment package with dependencies
+
+1. Navigate to the project directory containing your lambda_function.py source code file. In this example, the directory is named my_function.
+
+`cd my_function`
+
+2. Create a new directory named package into which you will install your dependencies.
+
+`mkdir package`
+
+3. Install your dependencies in the package directory
+
+`pip install --target ./package boto3`
+
+4. Create a .zip file with the installed libraries at the root.
+
+```
+cd package
+zip -r ../my_deployment_package.zip .
+```
+
+5. Add the lambda_function.py file to the root of the .zip file
+
+```
+cd ..
+zip my_deployment_package.zip lambda_function.py
+```
+
 #### Set up the database
 
 1. In your browser navigate to the site you used for your database design.
