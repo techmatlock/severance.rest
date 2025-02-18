@@ -12,6 +12,7 @@ client/dist
 client/dist-ssr
 client/*.local
 client/.vite
+client/.env
 lambdas/package
 lambdas/my_deployment_package.zip
 

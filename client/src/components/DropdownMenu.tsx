@@ -3,9 +3,11 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import quotes from "../quotes-list.json";
+import { useQuotes } from "../context/useQuotes";
 
 export default function DropDownMenu() {
+  const { quotes = [] } = useQuotes();
+
   return (
     <div className="mt-8">
       <Accordion>
@@ -15,8 +17,8 @@ export default function DropDownMenu() {
         <AccordionDetails className="max-h-60 overflow-y-auto">
           {quotes?.length > 0 ? (
             <ul className="space-y-2">
-              {quotes.map((quote, index) => (
-                <li key={index} className="border-b pb-2">
+              {quotes.map((quote) => (
+                <li key={quote.quoteId} className="border-b pb-2">
                   <span>
                     "{quote.quote}" - <strong>{quote.name}</strong>
                   </span>

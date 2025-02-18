@@ -2,10 +2,11 @@ import { useState } from "react";
 import "./App.css";
 import DropDownMenu from "./components/DropdownMenu";
 import GitHubButton from "react-github-btn";
-import quotes from "./quotes-list.json";
+import { useQuotes } from "./context/useQuotes";
 
 function App() {
   const [index, setIndex] = useState(0);
+  const { quotes = [] } = useQuotes();
 
   const showNextQuote = () => {
     setIndex((prevIndex) => (prevIndex + 1) % quotes.length);
