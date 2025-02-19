@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import DropDownMenu from "./components/DropdownMenu";
 import GitHubButton from "react-github-btn";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import XIcon from "@mui/icons-material/X";
 import { useQuotes } from "./context/useQuotes";
 
 function App() {
@@ -12,6 +14,10 @@ function App() {
     setIndex((prevIndex) => (prevIndex + 1) % quotes.length);
   };
 
+  const handleTwitterShare = () => {
+    window.open(`https://twitter.com/intent/tweet?text=${quotes[index].quote} - ${quotes[index].name}`, "_blank");
+  };
+
   return (
     <main className="grid">
       <div className="mt-12 text-center">
@@ -20,22 +26,24 @@ function App() {
       </div>
       <div className="flex flex-col mx-auto mt-8 w-1/2">
         <div className="flex flex-col sm:flex-row items-center">
-          <a href="https://api.severance.rest" target="_blank" className="text-blue-500 hover:underline">
+          <a href="https://api.severance.rest/quotes" target="_blank" className="text-blue-500 hover:underline">
             https://api.severance.rest
           </a>
-          <div className="flex gap-4 md:ml-auto">
-            <button className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-600">tweet</button>
-            <button onClick={showNextQuote} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-600">
-              refresh
+          <div className="flex gap-8 md:ml-auto">
+            <button onClick={() => handleTwitterShare()}>
+              <XIcon />
+            </button>
+            <button onClick={showNextQuote}>
+              <RefreshIcon />
             </button>
           </div>
         </div>
 
         <div>
           {quotes.length > 0 ? (
-            <blockquote className="py-8 px-8 bg-slate-100 rounded mx-auto mt-8">
+            <blockquote className="py-8 px-8 bg-slate-100 rounded mx-auto mt-8 h-[150px]">
               <p>"{quotes[index].quote}"</p>
-              <footer className="flex justify-end">- {quotes[index].name}</footer>
+              <footer className="flex justify-end pt-4">- {quotes[index].name}</footer>
             </blockquote>
           ) : (
             <p className="text-center mt-8">Loading quote...</p>
