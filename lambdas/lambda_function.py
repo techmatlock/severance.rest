@@ -8,7 +8,6 @@ from boto3.dynamodb.conditions import Key
 dynamodb = boto3.resource('dynamodb')
 dynamodb_table = dynamodb.Table('quotes')
 
-quote_path = '/quote'
 quotes_path = '/quotes'
 
 def lambda_handler(event, context):
@@ -16,10 +15,7 @@ def lambda_handler(event, context):
         http_method = event.get('httpMethod')
         path = event.get('path')
 
-        if http_method == 'GET' and path == quote_path:
-            quoteId = event['queryStringParameters']['quoteId']
-            response = get_quote(quoteId)
-        elif http_method == 'GET' and path == quotes_path:
+        if http_method == 'GET' and path == quotes_path:
             response = get_quotes()
         else:
             response = build_response(404, '404 Not Found')
@@ -29,14 +25,6 @@ def lambda_handler(event, context):
         response = build_response(400, 'Error processing request')
    
     return response
-
-def get_quote(id):
-    try:
-        response = dynamodb_table.get_item(Key={'quoteId': id})
-        return build_response(200, response.get('Item'))
-    except ClientError as e:
-        print('Error:', e)
-        return build_response(400, e.response['Error']['Message'])
 
 def get_quotes():
     try:
