@@ -2,84 +2,23 @@
 
 A free REST API for random Severance quotes.
 
-## Table of Contents
-
-## Preview
-
 ## Technologies Used
 
-- Lambda
+- AWS Lambda
 - API Gateway
 - DynamoDB
-- S3
+- S3 + CloudFront
 - React
 - TypeScript
 
-## Live Demo
+## Usage
 
-## Installation
+GET [https://api.severance.rest/quotes](https://api.severance.rest/quotes)
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   ```
-2. Navigate to the project directory:
-
-   ```bash
-   cd your-repo-name/client
-   npm install
-
-   cd your-repo-name/database
-   pip install -r requirements.txt
-   ```
-
-### Lambda
-
-Creating a .zip deployment package with dependencies
-
-1. Navigate to the project directory containing your lambda_function.py source code file. In this example, the directory is named my_function.
-
-`cd my_function`
-
-2. Create a new directory named package into which you will install your dependencies.
-
-`mkdir package`
-
-3. Install your dependencies in the package directory
-
-`pip install --target ./package boto3`
-
-4. Create a .zip file with the installed libraries at the root.
-
-```
-cd package
-zip -r ../my_deployment_package.zip .
+```html
+[{"quoteId": 2, "name": "Mark", "quote": "Every time you find yourself here, it's because you chose to come back."}, {"quoteId": 8, "name": "Dylan", "quote": "Just say the word, and I'll get you a coffee cozy literally right now."}, {"quoteId": 9, "name": "Mr. Milchick", "quote": "We serve Kier, you CHILD!"}, {"quoteId": 1, "name": "Mr. Milchick", "quote": "The Music Dance Experience is officially cancelled."}, {"quoteId": 6, "name": "Ms. Cobel", "quote": "A handshake is available upon request."}]
 ```
 
-5. Add the lambda_function.py file to the root of the .zip file
+## License
 
-```
-cd ..
-zip my_deployment_package.zip lambda_function.py
-```
-
-#### Set up the database
-
-1. In your browser navigate to the site you used for your database design.
-2. Export your database as PostgreSQL, this should generate the SQL code for creating your database tables.
-3. In a separate terminal, run `psql -d <databasebaseUrl> -f data.sql schema.sql` to create your tables
-4. After any changes to `database/schema.sql` or `database/data.sql` re-run the `psql <databasebaseUrl> -f data.sql -f schema.sql` command to update your database. Use `psql` to verify your changes were successfully applied.
-
-# Challenges Encountered
-
-- Error: Object of type Decimal is not JSON serializable
-
-Had to use a helper function to convert decimal because DynamoDB uses Decimal for numbers, while Python's json.dumps() does not support Decimal by default.
-
-- Error: An error occurred (ValidationException) when calling the GetItem operation: The provided key element does not match the schema
-
-I was using the wrong DynamoDB Primary Key in my Lambda function which handled the quote endpoint with a query parameter
-
-- Error: An error occurred (AccessDeniedException) when calling the GetItem operation: User: arn:aws:sts::456060160047:assumed-role/severance-api-role-06oxxfzm/severance-api is not authorized to perform: dynamodb:GetItem on resource: arn:aws:dynamodb:us-east-1:456060160047:table/quotes because no identity-based policy allows the dynamodb:GetItem action
-
-Used a custom IAM Policy which only allows the Lambda role to perform the actions: dynamodb:GetItem, dynamodb:Query, dynamodb:Scan
+MIT
