@@ -23,7 +23,3 @@ A free REST API for random Severance quotes.
   { "quoteId": 1, "name": "Mr. Milchick", "quote": "The Music Dance Experience is officially cancelled." }
 ]
 ```
-
-## License
-
-MIT
