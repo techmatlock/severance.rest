@@ -23,3 +23,25 @@ A free REST API for random Severance quotes.
   { "quoteId": 1, "name": "Mr. Milchick", "quote": "The Music Dance Experience is officially cancelled." }
 ]
 ```
+
+### `GET` [https://api.severance.rest/quote?name=Irving](https://api.severance.rest/quote?name=Irving)
+
+```json
+[
+  {
+    "quoteId": 16,
+    "name": "Irving",
+    "quote": "Hi, kids. What's for dinner?"
+  },
+  {
+    "quoteId": 13,
+    "name": "Irving",
+    "quote": "You smug motherfucker."
+  },
+  {
+    "quoteId": 4,
+    "name": "Irving",
+    "quote": "Let's burn this place to the ground."
+  }
+]
+```

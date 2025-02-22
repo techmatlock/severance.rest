@@ -2,13 +2,14 @@ import json
 import boto3
 from botocore.exceptions import ClientError
 from decimal import Decimal
-from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Attr
 
 # Initialize the DynamoDB client
 dynamodb = boto3.resource('dynamodb')
 dynamodb_table = dynamodb.Table('quotes')
 
 quotes_path = '/quotes'
+quote_path = '/quote'
 
 def lambda_handler(event, context):
     try:
@@ -17,6 +18,9 @@ def lambda_handler(event, context):
 
         if http_method == 'GET' and path == quotes_path:
             response = get_quotes()
+        elif http_method == 'GET' and path == quote_path:
+            name = event.get('queryStringParameters', {}).get('name')
+            response = get_quotes_by_name(name)
         else:
             response = build_response(404, '404 Not Found')
 
@@ -28,23 +32,21 @@ def lambda_handler(event, context):
 
 def get_quotes():
     try:
-        scan_params = {
-            'TableName': dynamodb_table.name
-        }
-        return build_response(200, scan_dynamo_records(scan_params, []))
+        return build_response(200, dynamodb_table.scan().get('Items', []))
     except ClientError as e:
         print('Error:', e)
         return build_response(400, e.response['Error']['Message'])
-
-def scan_dynamo_records(scan_params, item_array):
-    response = dynamodb_table.scan(**scan_params)
-    item_array.extend(response.get('Items', []))
-   
-    if 'LastEvaluatedKey' in response:
-        scan_params['ExclusiveStartKey'] = response['LastEvaluatedKey']
-        return scan_dynamo_records(scan_params, item_array)
-    else:
-        return item_array
+    
+def get_quotes_by_name(name):
+    if not name:
+        return build_response(400, 'Missing query parameter: name')
+    try:
+        response = dynamodb_table.scan(FilterExpression=Attr('name').begins_with(name))
+        items = response.get('Items', [])
+        return build_response(200, items)
+    except ClientError as e:
+        print('Error:', e)
+        return build_response(400, e.response['Error']['Message'])
 
 def convert_decimal(obj):
     if isinstance(obj, list):
