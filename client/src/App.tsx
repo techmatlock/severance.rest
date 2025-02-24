@@ -5,6 +5,7 @@ import GitHubButton from "react-github-btn";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import XIcon from "@mui/icons-material/X";
 import { useQuotes } from "./context/useQuotes";
+import imgUrl from "./public/lumon.png";
 
 function App() {
   const [index, setIndex] = useState(0);
@@ -25,7 +26,7 @@ function App() {
       <div className="mt-12 text-center">
         <div className="flex justify-center items-center">
           <div className="w-16">
-            <img src="/lumon.png" alt="a lumon logo" className="rounded-lg" />
+            <img src={imgUrl} alt="a lumon logo" className="rounded-lg" />
           </div>
           <h2 className="text-3xl font-semibold pl-4">severance.rest</h2>
         </div>
