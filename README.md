@@ -24,7 +24,7 @@ A free REST API for random Severance quotes.
 ]
 ```
 
-### `GET` [https://api.severance.rest/quote?name=Mr. Milchick](https://api.severance.rest/quote?name=Mr. Milchick)
+### `GET` [https://api.severance.rest/quote?name=Mr. Milchick](https://api.severance.rest/quote?name=Mr.%20Milchick)
 
 ```json
 [
