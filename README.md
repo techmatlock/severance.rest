@@ -24,24 +24,24 @@ A free REST API for random Severance quotes.
 ]
 ```
 
-### `GET` [https://api.severance.rest/quote?name=Irving](https://api.severance.rest/quote?name=Irving)
+### `GET` [https://api.severance.rest/quote?name=Mr. Milchick](https://api.severance.rest/quote?name=Mr. Milchick)
 
 ```json
 [
   {
-    "quoteId": 16,
-    "name": "Irving",
-    "quote": "Hi, kids. What's for dinner?"
+    "quoteId": 9,
+    "name": "Mr. Milchick",
+    "quote": "We serve Kier, you CHILD!"
   },
   {
-    "quoteId": 13,
-    "name": "Irving",
-    "quote": "You smug motherfucker."
+    "quoteId": 1,
+    "name": "Mr. Milchick",
+    "quote": "The Music Dance Experience is officially cancelled."
   },
   {
-    "quoteId": 4,
-    "name": "Irving",
-    "quote": "Let's burn this place to the ground."
+    "quoteId": 12,
+    "name": "Mr. Milchick",
+    "quote": "Marshmallows are for team players. They don’t just hand them out."
   }
 ]
 ```
