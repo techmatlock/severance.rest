@@ -5,7 +5,7 @@ import GitHubButton from "react-github-btn";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import XIcon from "@mui/icons-material/X";
 import { useQuotes } from "./context/useQuotes";
-import imgUrl from "./public/lumon.png";
+import imgUrl from "../public/lumon.png";
 
 function App() {
   const [index, setIndex] = useState(0);
