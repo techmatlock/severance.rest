@@ -1,6 +1,6 @@
 # [severance.rest](https://severance.rest)
 
-A free REST API for random Severance quotes.
+Inspired by the TV show Severance. A free REST API for random quotes.
 
 ## Technologies Used
 
