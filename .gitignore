@@ -14,7 +14,7 @@ client/*.local
 client/.vite
 client/.env
 lambdas/package
-lambdas/my_deployment_package.zip
+lambdas/*.zip
 
 # Editor directories and files
 .vscode/*
