@@ -21,6 +21,9 @@ def lambda_handler(event, context):
         elif http_method == 'GET' and path == quote_path:
             name = event.get('queryStringParameters', {}).get('name')
             response = get_quotes_by_name(name)
+        elif http_method == 'POST' and path == quote_path:
+            post = json.loads(event.get('body', '{}'))
+            response = add_quote(post)
         else:
             response = build_response(404, '404 Not Found')
 
@@ -44,6 +47,30 @@ def get_quotes_by_name(name):
         response = dynamodb_table.scan(FilterExpression=Attr('name').begins_with(name))
         items = response.get('Items', [])
         return build_response(200, items)
+    except ClientError as e:
+        print('Error:', e)
+        return build_response(400, e.response['Error']['Message'])
+    
+def add_quote(data):
+    if 'name' not in data or 'quote' not in data:
+            return build_response(400, {"message": "Missing name or quote in request body"})
+    try:
+        response = dynamodb_table.scan(
+            TableName=dynamodb_table,
+            Select="COUNT"
+        )
+
+        new_id = str(response['Count'] + 1)  # Incrementing PK "quoteId" + 1
+
+        dynamodb_table.put_item(
+            TableName=dynamodb_table,
+            Item={
+                'quoteId': {'N': new_id},
+                'name': {'S': data['name']},
+                'quote': {'S': data['quote']}
+            }
+        )
+        return build_response(201, {"message": "Quote added successfully", "quoteId": new_id})
     except ClientError as e:
         print('Error:', e)
         return build_response(400, e.response['Error']['Message'])
