@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18.x, 20.x]
 
     defaults:
       run:
@@ -30,12 +30,11 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
       - name: Upload dist folder to S3
-      - uses: jakejarvis/s3-sync-action@master
+        uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "us-east-1" # optional: defaults to us-east-1
-          SOURCE_DIR: "dist" # optional: defaults to entire repository
+          SOURCE_DIR: "./client/dist" # optional: defaults to entire repository
