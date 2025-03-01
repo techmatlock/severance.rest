@@ -30,7 +30,7 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
       - name: Upload dist folder to S3
-      - uses: jakejarvis/s3-sync-action@master
+        uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
