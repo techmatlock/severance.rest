@@ -28,6 +28,10 @@ jobs:
           cache-dependency-path: "./client/package-lock.json"
       - run: npm ci
       - run: npm run build --if-present
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_AWS_COGNITO_USER_POOL_ID: ${{ secrets.VITE_AWS_COGNITO_USER_POOL_ID }}
+          VITE_AWS_COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.VITE_AWS_COGNITO_USER_POOL_CLIENT_ID }}
       - run: npm test
       - name: Upload dist folder to S3
         uses: jakejarvis/s3-sync-action@master
