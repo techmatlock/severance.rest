@@ -4,5 +4,5 @@ import { Navigate, Outlet } from "react-router-dom";
 export default function ProtectedRoutes() {
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
 
-  return authStatus === "authenticated" ? <Outlet /> : <Navigate to="/sign-in" />;
+  return authStatus !== "unauthenticated" ? <Outlet /> : <Navigate to="/sign-in" />;
 }
