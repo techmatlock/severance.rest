@@ -6,6 +6,7 @@ Inspired by the TV show Severance. A free REST API for random quotes.
 
 - AWS Lambda
 - API Gateway
+- AWS Cognito
 - DynamoDB
 - S3 + CloudFront
 - React
