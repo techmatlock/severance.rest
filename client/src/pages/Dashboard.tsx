@@ -1,7 +1,13 @@
+import { signOut } from "aws-amplify/auth";
+
 export default function Dashboard() {
+  async function handleSignOut() {
+    await signOut();
+  }
+
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <button type="button" onClick={handleSignOut} className="p-2 bg-red-500 text-white rounded">
+      Sign out
+    </button>
   );
 }

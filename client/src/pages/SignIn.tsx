@@ -1,7 +1,8 @@
-import { Authenticator } from "@aws-amplify/ui-react";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
-import { signOut } from "@aws-amplify/auth";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 Amplify.configure({
   Auth: {
@@ -28,17 +29,18 @@ const formFields = {
 };
 
 export default function SignIn() {
-  async function handleSignOut() {
-    await signOut();
-  }
+  const navigate = useNavigate();
+  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+
+  useEffect(() => {
+    if (authStatus === "authenticated") {
+      navigate("/dashboard");
+    }
+  }, [authStatus, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <Authenticator formFields={formFields} hideSignUp>
-        <button type="button" onClick={handleSignOut}>
-          Sign out
-        </button>
-      </Authenticator>
+      <Authenticator formFields={formFields} hideSignUp />
     </div>
   );
 }

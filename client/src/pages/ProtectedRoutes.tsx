@@ -1,8 +1,18 @@
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import { Navigate, Outlet } from "react-router-dom";
+import { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
 
-export default function ProtectedRoutes() {
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+export default function ProtectedRoutes({ children }: ProtectedRouteProps) {
   const { authStatus } = useAuthenticator((context) => [context.authStatus]);
 
-  return authStatus !== "unauthenticated" ? <Outlet /> : <Navigate to="/sign-in" />;
+  if (authStatus !== "authenticated") {
+    return <Navigate to="/admin" replace />;
+  }
+
+  // render Dashboard component
+  return <>{children}</>;
 }
