@@ -1,6 +1,3 @@
-import "@types/jest";
-import "@jest/globals";
-
 // helper function
 const createMockResponse = (data, options = {}) => ({
   ok: true,
