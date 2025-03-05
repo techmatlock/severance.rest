@@ -19,7 +19,7 @@ export default function Dashboard() {
         const session = await fetchAuthSession();
         setToken(session.tokens?.idToken);
       } catch (error) {
-        console.log(`Failed to retrieve token. Error: ${error}`);
+        console.error("Failed to retrieve token:", error);
       }
     }
     checkToken();
