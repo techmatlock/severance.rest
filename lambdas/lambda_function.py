@@ -1,4 +1,4 @@
-import json
+import json, os
 import boto3
 from botocore.exceptions import ClientError
 from decimal import Decimal
@@ -84,11 +84,13 @@ def convert_decimal(obj):
 
 
 def build_response(status_code, body):
+    cors_url = os.environ.get("CORS_URL")
+
     return {
         'statusCode': status_code,
         'headers': {
             'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": cors_url,
         },
         'body': json.dumps(convert_decimal(body))
     }
