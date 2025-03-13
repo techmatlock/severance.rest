@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-  height: 100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Open Sans", sans-serif;
-}
-
-nav ul li {
-  padding: 0.5rem 0;
 }
