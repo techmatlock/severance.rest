@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { API_URL, Quotes } from "../lib/data";
+import { useLocation } from "react-router-dom";
 
 export type QuotesContextValues = {
   quotes: Quotes[] | undefined;
@@ -18,18 +19,21 @@ type Props = {
 export function QuotesProvider({ children }: Props) {
   const [quotes, setQuotes] = useState<Quotes[]>([]);
   const [error, setError] = useState<unknown>();
+  const location = useLocation();
 
   useEffect(() => {
     async function loadQuotes() {
       try {
-        const data = await getQuotes();
-        setQuotes(data);
+        if (location.pathname === "/") {
+          const data = await getQuotes();
+          setQuotes(data);
+        }
       } catch (error) {
         setError(error);
       }
     }
     loadQuotes();
-  }, []);
+  }, [location.pathname]);
 
   async function getQuotes(): Promise<Quotes[]> {
     const res = await fetch(`${API_URL}/quotes`, {
