@@ -33,8 +33,8 @@ export default function Dashboard() {
 
   return (
     <>
-      <ToastContainer position="top-center" />
       <header className="flex items-center sm:justify-center sm:mb-10 lg:justify-end lg:mr-20 gap-12 pt-6">
+        <ToastContainer position="top-left" />
         <Link to="/">Home</Link>
         <button type="button" onClick={handleSignOut}>
           Sign out
