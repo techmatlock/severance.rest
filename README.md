@@ -46,3 +46,14 @@ Inspired by the TV show Severance. A free REST API for random quotes.
   }
 ]
 ```
+
+### Lambda
+
+1. cd /lambdas/
+2. mkdir package
+3. pip install --target ./package boto3
+4. cd package
+5. zip -r ../my_deployment_package.zip .
+6. cd ..
+7. zip my_deployment_package.zip lambda_function.py
+8. aws lambda update-function-code --function-name severance-api --zip-file fileb://my_deployment_package.zip
